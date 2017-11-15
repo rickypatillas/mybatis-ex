@@ -1,5 +1,6 @@
 package com.springrest.services;
 
+import com.springrest.exceptions.InvalidRequestException;
 import com.springrest.mappers.UserMapper;
 import com.springrest.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class UserService {
 
     //get user by id
     public User getById(int id){
+        //if user comes null, throw new USERNOTFOUNDEXC.
         return userMapper.getByID(id);
     }
 
@@ -105,4 +107,20 @@ public class UserService {
         userMapper.deleteUser(id);
         return userMapper.getByID(id);
     }
+
+    //method for error handling getLastName
+    public ArrayList<User> selectByLastName(String lastName) throws InvalidRequestException {
+        ArrayList<User> users = userMapper.selectByLastName(lastName);
+        System.out.println(users.get(0).getFirst_name());
+        if (users.get(0).getFirst_name().equals("Kevin")) {
+            throw new InvalidRequestException("whyyyyyy", 418);
+        }
+        return users;
+    }
+
+    public User getByName(String name) throws InvalidRequestException{
+       return userMapper.getByName(name);
+    }
+
+
 }

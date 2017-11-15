@@ -29,4 +29,13 @@ public class EpicQuotes {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "EpicQuotes{" +
+                "id=" + id +
+                ", quote='" + quote + '\'' +
+                ", character='" + character + '\'' +
+                '}';
+    }
 }

@@ -1,5 +1,6 @@
 package com.springrest.services;
 
+import com.springrest.exceptions.InvalidRequestException;
 import com.springrest.mappers.NYTMapper;
 import com.springrest.model.nyt.Multimedia;
 import com.springrest.model.nyt.NYT_Top;
@@ -85,4 +86,19 @@ public class NYTService {
         }
 
     }
+
+    public ArrayList<TopStories> topStoriesSearchBySection(String section) throws InvalidRequestException {
+
+
+        try {
+            int tempId = mapper.checkIfSectionExists(section);
+        } catch (Exception npe) {
+            throw new InvalidRequestException("unknown sections " + section, 400);
+
+        }
+
+        return mapper.searchBySection(section);
+    }
+
+
 }
